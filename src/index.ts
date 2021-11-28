@@ -1,11 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import { route } from "./routes";
+import { MongoConnection } from "./database/MongoConnection";
 
 dotenv.config();
 
 const api = express();
 api.use(express.json());
+
+const database = new MongoConnection();
+database.connect();
 
 api.use("/", route);
 
