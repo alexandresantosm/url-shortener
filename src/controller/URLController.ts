@@ -17,4 +17,17 @@ export class URLController {
     // Retornar a URL salva
     res.json({ originURL, hash, shortURL });
   }
+
+  async redirect(req: Request, res: Response): Promise<void> {
+    // Pegar o hash pela URL
+    const { hash } = req.params;
+    // Encontrar a URL original pelo hash
+    const url = {
+      originURL: "https://github.com/motdotla/dotenv",
+      hash,
+      shortURL: "http://localhost:5000/I5pNQjbYV",
+    };
+    // Redirecionar para a URL original
+    res.status(307).redirect(url.originURL);
+  }
 }
