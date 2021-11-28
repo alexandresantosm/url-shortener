@@ -1,10 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
+import { route } from "./routes";
 
 dotenv.config();
 
 const api = express();
 api.use(express.json());
+
+api.use("/", route);
+
 api.listen(process.env.PORT_SERVER, statusServer);
 
 function statusServer() {
