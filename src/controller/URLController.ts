@@ -29,12 +29,12 @@ export class URLController {
     // Pegar o hash pela URL
     const { hash } = req.params;
     // Encontrar a URL original pelo hash
-    const url = {
-      originURL: "https://github.com/motdotla/dotenv",
-      hash,
-      shortURL: "http://localhost:5000/I5pNQjbYV",
-    };
+    const url = await URLModel.findOne({ hash });
     // Redirecionar para a URL original
-    res.status(307).redirect(url.originURL);
+    if (url) {
+      res.status(307).redirect(url.originURL);
+      return;
+    }
+    res.status(400).json({ error: "URL not found" });
   }
 }
